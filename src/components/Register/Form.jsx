@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Form = () => {
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     namaLengkap: '',
     email: '',
@@ -63,13 +60,16 @@ const Form = () => {
 
     const lastSentTime = parseInt(localStorage.getItem('lastSentTime')) || 0;
     const minTimeDifference = 5 * 60 * 1000;
+
     const currentTime = new Date().getTime();
 
     if (currentTime - lastSentTime < minTimeDifference) {
       alert('Harap tunggu 5 menit sebelum mengirim OTP lagi.');
       return;
     }
+
     const text = generateRandomText(6);
+
     const { noHandphone } = formData;
 
     try {
@@ -103,7 +103,7 @@ const Form = () => {
       <h1 className="font-medium text-lg">Selamat Datang di,</h1>
       <h2 className="font-semibold text-[26px]">Form Registrasi Akun</h2>
       <p className="text-zinc-400 text-sm font-medium my-3">Silahkan isi form untuk membuat akun anda! </p>
-      <form onSubmit={handleSubmit} className="flex flex-col w-fullx">
+      <form onSubmit={handleSubmit} className="flex flex-col w-full">
         <div className="flex gap-x-3">
           <div>
             <label htmlFor="namaLengkap" className="mb-2">
@@ -120,33 +120,33 @@ const Form = () => {
             />
           </div>
           <div>
-            <label htmlFor="noHandphone" className="my-2">
-              Nomor Handphone
+            <label htmlFor="email" className="my-2">
+              Email
             </label>
             <input
-              type="text"
-              id="noHandphone"
-              name="noHandphone"
+              type="email"
+              id="email"
+              name="email"
               required
-              placeholder="cth: 081233445566"
+              placeholder="cth: budi@gmail.com"
               className="px-9 py-3 rounded-[14px] bg-[#FAFAFA] focus:outline-none focus:ring-2 focus:ring-primaryOrange focus:border-transparent w-full"
               style={{ border: '2px solid #F1ECEC' }}
-              onChange={handleInputChange}
             />
           </div>
         </div>
 
-        <label htmlFor="email" className="my-2">
-          Email
+        <label htmlFor="noHandphone" className="my-2">
+          Nomor Handphone
         </label>
         <input
-          type="email"
-          id="email"
-          name="email"
+          type="text"
+          id="noHandphone"
+          name="noHandphone"
           required
-          placeholder="cth: budi@gmail.com"
+          placeholder="cth: 081233445566"
           className="px-9 py-3 rounded-[14px] bg-[#FAFAFA] focus:outline-none focus:ring-2 focus:ring-primaryOrange focus:border-transparent w-full"
           style={{ border: '2px solid #F1ECEC' }}
+          onChange={handleInputChange}
         />
 
         <label htmlFor="kabupaten" className="my-2">
